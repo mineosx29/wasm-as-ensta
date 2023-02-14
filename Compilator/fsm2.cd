@@ -1,0 +1,22 @@
+begin automate : 
+    input = active;desactive
+    
+    state = eteint, allume
+    
+   case allume:
+    	begin:
+        	if(active) then
+            		next_state=allume
+            if(desactive) then
+                    next_state=eteint
+    end case
+    
+      case eteint:
+    	begin:
+        	if(active) then
+            		next_state=allume
+        	if(desactive) then
+            		next_state=eteint
+    end case
+
+end

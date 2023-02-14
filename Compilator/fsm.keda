@@ -1,0 +1,29 @@
+begin auto1:
+
+
+    input : reveil,panne,greve
+    input : bug
+    state : DODO,METRO,BOULOT
+
+    case DODO{
+        if(not(reveil)) then
+            next_state=DODO
+        if(reveil) then
+            next_state=METRO
+    }
+
+    case METRO{
+        if(greve or panne) then
+            next_state=METRO
+        if(not(greve) and not(panne)) then
+            next_state=BOULOT
+    }    
+
+    case BOULOT{
+        if(bug) then
+            next_state=BOULOT
+        if(not(bug)) then
+            next_state=DODO
+    }    
+
+end

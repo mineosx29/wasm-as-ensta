@@ -1,0 +1,13 @@
+digraph automate{
+rankdir=LR;
+size="8,5"
+node [shape = doublecircle];eteint;
+node [shape = point ]; qi
+node [shape = circle];
+qi -> eteint;
+node [shape = circle];allume;
+allume -> allume [ label = "active"];
+allume -> eteint [ label = "desactive"];
+eteint -> allume [ label = "active"];
+eteint -> eteint [ label = "desactive"];
+}
