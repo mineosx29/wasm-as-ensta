@@ -40,8 +40,17 @@ Ensuite, nous pouvons complexifier le module en ajoutant un noeud func :
 ```
 ( func <signature> <locals> <body> )
 ```
-La signature prend les paramètres de la fonction ainsi que ses types.
+- La signature prend les paramètres de la fonction ainsi que ses types.
 
-La partie locals prends les variables et ses types.
+- La partie locals prends les variables et ses types.
 
-La partie body est une suite linéaire d'instruction de bas niveau.
+- La partie body est une suite linéaire d'instruction de bas niveau.
+
+Signature et paramètres : 
+
+| Paramètre | types         |
+|-----------|----------------
+| i32       | 32bit integer |
+| i64       | 64bit integer |
+| f32       | 32bit float   |
+| f64       | 64bit float   |
