@@ -1,0 +1,44 @@
+<html>  
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="site.css"/>
+        <script src="wasm_exec.js"></script>
+        <script>
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("json.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        </script>
+    </head>
+    
+        <body id="ENSTAutoWeb_Body">
+            <main>
+                <nav>
+                    <h1><strong>ENSTAutoWeb 2022</strong>  <a>par</a> <a> Nadir Ziani</a></h1>
+                    
+                        
+                        
+                    
+                </nav>
+                <div id="simulator" class="hidden">
+                    <div id="zone_image">
+                        <img id="image" src="#"/>
+                        
+                                                
+                    </div>
+                    <div id="zone_simu">
+                        <img id="image_simu" src="#"/>
+                        
+  
+                            
+                    </div>
+                   <canvas id="canvas"></canvas>
+                   <canvas id="canvas2"></canvas>
+                   <canvas id="canvas3"></canvas>
+                   <input type="text" placeholder="Commande" id="in">
+                   <button id="ok" type="submit" >OK</button>
+                </div>
+
+            </main>
+    </body>
+</html>  
