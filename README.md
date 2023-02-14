@@ -1,4 +1,4 @@
-> [ZIANI Nadir](https://github.com/mineosx29) Promotion FIPA 2023 SE
+> [ZIANI Nadir](https://github.com/mineosx29) FIPA SE 2023 
 ## Introduction Générale
 Dans le cadre du module Application Système, j'ai choisi le sujet : Découverte du [WebAssembly](https://webassembly.org/)
 Cette application sert principalement à démontrer les possibilités de développement qu'on peut effectuer avec WASM.
@@ -23,3 +23,12 @@ make robot
 make lampe
 ...
 ```
+
+ensuite aller dans le dossier cmd/server/ et lancer la commande : 
+
+```
+go run main.go
+```
+
+Aller dans votre navigateur, et aller à l'adresse : 
+http://localhost:9090 pour lancer le simulateur
