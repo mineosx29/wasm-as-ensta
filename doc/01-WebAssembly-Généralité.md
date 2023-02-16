@@ -54,3 +54,9 @@ Signature et paramètres :
 | i64       | 64bit integer |
 | f32       | 32bit float   |
 | f64       | 64bit float   |
+
+## Son format binaire
+
+A la compilation, nous pouvons lire le fichier wasm et on pourra distinguer des données binaire:
+
+<img <img src="images/binaire.jpg" width="600">  >
