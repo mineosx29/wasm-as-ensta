@@ -34,9 +34,6 @@ class GeneratorGo:
         if self.write_state_ident:
             if self.initial_state:
                 self.file.write("const (\n\t"+ ident.tok+" State = iota\n")
-                #self.file.write("node [shape = point ]; qi\n")
-                #self.file.write("node [shape = circle];\n");
-                #self.file.write("qi -> "+ident.tok+";\n");
                 self.initial_state=False
             else:
                 self.file.write("\t"+ident.tok+ "\n")
