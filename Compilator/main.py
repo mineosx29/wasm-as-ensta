@@ -6,6 +6,7 @@ import sys
 import parser
 import generator
 import writeClass
+import generatorGo
 
 
 class Compile:
@@ -21,6 +22,8 @@ class Compile:
         print("Generating DOT Code....")
         generatorCode = generator.GeneratorDot()
         gene = generatorCode.visitAuto(ast, "code.gv" )
+        generatorCodeGo = generatorGo.GeneratorGo()
+        gen = generatorCodeGo.visitAuto(ast, "code.go")
         writ = writeClass.WriteClass()
         writ.WriteFunction()
         print("Process End")
