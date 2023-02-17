@@ -2,6 +2,14 @@ begin automate :
     input = active;desactive
     
     state = eteint, allume
+
+     case eteint:
+    	begin:
+        	if(active) then
+            		next_state=allume
+        	if(desactive) then
+            		next_state=eteint
+    end case
     
    case allume:
     	begin:
@@ -9,14 +17,6 @@ begin automate :
             		next_state=allume
             if(desactive) then
                     next_state=eteint
-    end case
-    
-      case eteint:
-    	begin:
-        	if(active) then
-            		next_state=allume
-        	if(desactive) then
-            		next_state=eteint
     end case
 
 end
