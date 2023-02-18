@@ -1,4 +1,2 @@
 eteint -> allume [ label = "active"];
-eteint -> eteint [ label = "desactive"];
-allume -> allume [ label = "active"];
 allume -> eteint [ label = "desactive"];
