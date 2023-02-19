@@ -18,7 +18,7 @@ class GeneratorDot:
             etat.accept(self)
         self.file.write("}")
         self.file.close()
-        print("generator: the DOT Code is generated")
+        print("generator: the DOT File is generated")
     
     def visitVariable(self,variable):
         variable.type.accept(self)
