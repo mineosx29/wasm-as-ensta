@@ -5,13 +5,13 @@ from lexer import Lexer_Compilator
 import sys
 import parser
 import generator
-import writeClass
 import generatorGo
 
 
 class Compile:
 
     def compile(self):
+        fileGo = input(str("Entrez le nom du fichier go que vous voulez Générer : \n"))
         file = sys.argv[1]
         print("Lexer Module Starting ....")
         lexer_file = Lexer_Compilator()
@@ -23,9 +23,7 @@ class Compile:
         generatorCode = generator.GeneratorDot()
         gene = generatorCode.visitAuto(ast, "code.gv" )
         generatorCodeGo = generatorGo.GeneratorGo()
-        gen = generatorCodeGo.visitAuto(ast, "code.go")
-        writ = writeClass.WriteClass()
-        writ.WriteFunction()
+        gen = generatorCodeGo.visitAuto(ast, fileGo)
         print("Process End")
         
 
