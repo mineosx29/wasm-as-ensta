@@ -26,7 +26,7 @@ class Parser:
     def parse(self, tokens):
         self.tokens = tokens 
         ast2 = self.parse_program()
-        print("Parser part is success")
+        print("Parsing is Success ! ")
         return ast2
 
 
