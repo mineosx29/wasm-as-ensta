@@ -1,10 +1,10 @@
 class GeneratorGo:
     def __init__(self):
-        self.write_state_ident=False
-        self.write_state_cond=False
-        self.write_state_assignment=False
-        self.save_actual_state=False
-        self.initial_state=True
+        self.ecriture_etat=0
+        self.etat_condition=0
+        self.assignement_etat=0
+        self.etat_actuel_backup=0
+        self.etat_initial=1
 
     def visitAuto(self,auto,file):
         self.file=open(file,"w")
@@ -36,33 +36,33 @@ class GeneratorGo:
 
     def visitIdent(self,ident):
         print("IDENT")
-        if self.write_state_ident:
-            if self.initial_state:
+        if self.ecriture_etat == 1:
+            if self.etat_initial == 1:
                 self.file.write("\tstate = " + ident.tok + "\n\n")
                 self.file.write("\tconst (\n\t"+ ident.tok+" State = iota\n")
-                self.initial_state=False
+                self.etat_initial=0
             else:
                 self.file.write("\t"+ident.tok+ "\n")
-            self.write_state_ident=False
+            self.ecriture_etat=0
         #self.file.write(")\n")
-        if self.write_state_cond:
+        if self.etat_condition == 1:
             self.file.write(ident.tok)
-        if self.write_state_assignment:
-            self.initial_state = True
+        if self.assignement_etat == 1:
+            self.etat_initial = 1
             self.file.write("state = "+ident.tok+"\n")
-            self.write_state_assignment=False
-        if self.save_actual_state:
+            self.assignement_etat=0
+        if self.etat_actuel_backup == 1:
             self.actual_state=ident.tok+":"
-            self.save_actual_state=False
+            self.etat_actuel_backup=0
 
 
     def visitType(self,type):
         if type.tok=="state":
-            self.write_state_ident=True
+            self.ecriture_etat=1
 
 
     def visitEtats(self,etats):
-        self.save_actual_state=True
+        self.etat_actuel_backup=1
         etats.ident.accept(self)
         for condition in etats.condition:
             condition.accept(self)
@@ -74,25 +74,27 @@ class GeneratorGo:
         self.file.write("\n")
         self.file.write("\t\t\t")
         self.file.write("if commande == \"")
-        self.write_state_cond=True
+        self.etat_condition=1
         if_.condition.accept(self)
-        self.write_state_cond=False
+        self.etat_condition=0
         self.file.write("\"")
         self.file.write(" {\n\t\t\t\t")
-        self.write_state_assignment=True
+        self.assignement_etat=1
         if_.assign.accept(self)
         self.file.write("}\n")
-        #self.file.write(" [ label = \"")
-        #self.file.write("\"];\n")
+
         
 
     def visitBinary(self,binary):
         binary.lhs.accept(self)
-        if binary.op is None and binary.rhs is None:
-            pass
-        else:
+        # if binary.op is None and binary.rhs is None:
+        #     pass
+        # else:
+        #     self.file.write(' '+binary.op+' ')
+        #     binary.rhs.accept(self) 
+        if binary.op and binary.rhs:
             self.file.write(' '+binary.op+' ')
-            binary.rhs.accept(self) 
+            binary.rhs.accept(self)
 
     def visitExpression(self,expression):
         self.file.write("(")

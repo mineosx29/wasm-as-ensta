@@ -11,8 +11,8 @@ class Parser:
         if next.kind == kind:
             self.acceptIt()
         else:
-            print("Erreur de syntaxe : " + str(self.showNext().position) )
-            print("Attendu : ", kind, "mais on obtient : " , next.kind)
+            print("Expect Error : syntax error line " + str(self.showNext().position) )
+            print("Expected : ", kind, "but have : " , next.kind)
             exit()
         return next.value
 
