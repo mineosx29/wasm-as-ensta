@@ -11,6 +11,9 @@ import argparse
 class Compile:
 
     def compile(self, inputFile = None, outputFile = None, outputFileDot = None):
+        if outputFile != "fsm.go":
+            print("Error, the file must be called fsm.go")
+            exit()
         print("Lexer Module Starting ....")
         lexer_file = Lexer_Compilator()
         tok = lexer_file.lexer(inputFile)
