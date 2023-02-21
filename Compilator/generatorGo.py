@@ -5,7 +5,7 @@ class GeneratorGo:
         self.assignement_etat=0
         self.etat_actuel_backup=0
         self.etat_initial=1
-        self.assignement_etat_ini = 0
+        self.depart = 0
 
     def visitAuto(self,auto,file):
         self.file=open(file,"w")
@@ -35,10 +35,10 @@ class GeneratorGo:
         self.file.write("\tvar cb js.Func\n")
         self.file.write("\tcb = js.FuncOf(func(this js.Value, args []js.Value) interface{} {\n")
         self.file.write("\tcommande = GetString(\"in\", \"value\")\n\n")
-        self.file.write("\tswitch state {\n")
+        #self.file.write("\tswitch state {\n")
         for etat in auto.etats:
             etat.accept(self)
-        self.file.write("\t}\n")
+        #self.file.write("\t}\n")
         self.file.write("\t\t\treturn nil\n\n")
         self.file.write("\t\t})\n")
         self.file.write("\tbutton.Call(\"addEventListener\", \"click\", cb)\n")
@@ -71,12 +71,13 @@ class GeneratorGo:
         #     self.assignement_etat_ini = 0
         if self.assignement_etat == 1:
             self.etat_initial = 1
-            self.file.write("fmt.Println(\" Passage à Etat : \")\n");
-            self.file.write("\t\t\t\tfmt.Println(" + ident.tok+")\n")
+            self.file.write("fmt.Println(\" Passage à Etat : ");
+            self.file.write(ident.tok)
+            self.file.write("\")\n")
             self.file.write("\t\t\t\tstate = "+ident.tok+"\n")
             self.assignement_etat=0
         if self.etat_actuel_backup == 1:
-            self.actual_state=ident.tok+":"
+            self.actual_state=ident.tok
             self.act_state = ident.tok
             self.etat_actuel_backup=0
 
@@ -95,10 +96,10 @@ class GeneratorGo:
     
     def visitIF(self,if_):
         print("IF")
-        self.file.write("\t\tcase ")
-        self.file.write(self.actual_state)
-        self.file.write("\n")
-        self.file.write("\t\t\t")
+        self.file.write("\t\tif state == ")
+        self.file.write(self.actual_state + " {\n")
+        self.file.write("\n\t")
+        self.file.write("\t\t")
         self.file.write("if commande == \"")
         self.etat_condition=1
         if_.condition.accept(self)
@@ -107,7 +108,9 @@ class GeneratorGo:
         self.file.write(" {\n\t\t\t\t")
         self.assignement_etat=1
         if_.assign.accept(self)
-        self.file.write("\t\t\t}\n")
+        self.file.write("\t\t\t\t}\n")
+        self.file.write("\t\t}\n")
+       
         
        
         

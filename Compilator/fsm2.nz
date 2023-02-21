@@ -1,20 +1,28 @@
 begin automate : 
-    input = active;desactive
+    input = haut;bas;gauche;droite
     
-    state = eteint, allume
+    state = off,monte, descend,gauche,droite
 
-     case eteint:
+    case off:
+        begin:
+            if (haut) then
+                     next_state=monte
+            if (bas) then
+                     next_state=descend
+    end case
+
+    case monte:
     	begin:
-        	if(active) then
-            		next_state=allume
+        	if(stop) then
+            		next_state=off
         	
     end case
     
-   case allume:
+   case descend:
     	begin:
-        	
-            if(desactive) then
-                    next_state=eteint
+        	if(stop) then
+                    next_state=off
+    
     end case
 
 end

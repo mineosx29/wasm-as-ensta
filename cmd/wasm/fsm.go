@@ -32,30 +32,47 @@ func GetString(elem string, value string) string {
 func main() {
 	quit := make(chan struct{}, 0)
 	const (
-	eteint State = iota
+	off State = iota
 
-	allume
+	monte
+	descend
+	gauche
+	droite
 )
-	state := eteint
+	state := off
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	var cb js.Func
 	cb = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 	commande = GetString("in", "value")
 
-	switch state {
-		case eteint:
-			if commande == "active" {
-				fmt.Println(" Passage à Etat : ")
-				fmt.Println(allume)
-				state = allume
-			}
-		case allume:
-			if commande == "desactive" {
-				fmt.Println(" Passage à Etat : ")
-				fmt.Println(eteint)
-				state = eteint
-			}
-	}
+		if state == off {
+
+			if commande == "haut" {
+				fmt.Println(" Passage à Etat : monte")
+				state = monte
+				}
+		}
+		if state == off {
+
+			if commande == "bas" {
+				fmt.Println(" Passage à Etat : descend")
+				state = descend
+				}
+		}
+		if state == monte {
+
+			if commande == "stop" {
+				fmt.Println(" Passage à Etat : off")
+				state = off
+				}
+		}
+		if state == descend {
+
+			if commande == "stop" {
+				fmt.Println(" Passage à Etat : off")
+				state = off
+				}
+		}
 			return nil
 
 		})

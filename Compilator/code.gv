@@ -1,11 +1,16 @@
 digraph automate{
 rankdir=LR;
 size="8,5"
-node [shape = doublecircle];eteint;
+node [shape = doublecircle];off;
 node [shape = point ]; qi
 node [shape = circle];
-qi -> eteint;
-node [shape = circle];allume;
-eteint -> allume [ label = "active"];
-allume -> eteint [ label = "desactive"];
+qi -> off;
+node [shape = circle];monte;
+node [shape = circle];descend;
+node [shape = circle];gauche;
+node [shape = circle];droite;
+off -> monte [ label = "haut"];
+off -> descend [ label = "bas"];
+monte -> off [ label = "stop"];
+descend -> off [ label = "stop"];
 }
