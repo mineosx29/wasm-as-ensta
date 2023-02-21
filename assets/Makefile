@@ -18,6 +18,7 @@ endif
 	
 lampe: ../cmd/wasm/lampe.wasm 
 robot: ../cmd/wasm/robot.wasm
+fsm  : ../cmd/wasm/fsm.wasm
 
 
 	

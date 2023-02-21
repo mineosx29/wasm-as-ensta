@@ -22,7 +22,7 @@ class Compile:
         ast = parser2.parse(tok)
         print("Generating DOT Code....")
         generatorCode = generator.GeneratorDot()
-        gene = generatorCode.visitAuto(ast, outputFileDot )
+        gene = generatorCode.visitAuto(ast, outputFileDot)
         generatorCodeGo = generatorGo.GeneratorGo()
         gen = generatorCodeGo.visitAuto(ast, outputFile)
         print("Process End")
