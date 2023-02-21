@@ -41,6 +41,8 @@ func main() {
 )
 	state := off
 	button := js.Global().Get("document").Call("getElementById", "ok")
+	image := js.Global().Get("document").Call("getElementById", "image")
+	image.Set("src", "code2.png")
 	var cb js.Func
 	cb = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 	commande = GetString("in", "value")
@@ -48,7 +50,7 @@ func main() {
 		if state == off {
 
 			if commande == "haut" {
-				fmt.Println(" Passage à Etat : monte")
+				fmt.Print(" Passage à Etat : monte")
 				state = monte
 				}
 		}
@@ -57,6 +59,20 @@ func main() {
 			if commande == "bas" {
 				fmt.Println(" Passage à Etat : descend")
 				state = descend
+				}
+		}
+		if state == off {
+
+			if commande == "gauche" {
+				fmt.Println(" Passage à Etat : gauche")
+				state = gauche
+				}
+		}
+		if state == off {
+
+			if commande == "droite" {
+				fmt.Println(" Passage à Etat : droite")
+				state = droite
 				}
 		}
 		if state == monte {

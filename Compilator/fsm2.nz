@@ -9,12 +9,17 @@ begin automate :
                      next_state=monte
             if (bas) then
                      next_state=descend
+            if (gauche) then
+                     next_state=gauche
+            if (droite) then
+                     next_state=droite
     end case
 
     case monte:
     	begin:
         	if(stop) then
             		next_state=off
+            
         	
     end case
     
@@ -22,6 +27,7 @@ begin automate :
     	begin:
         	if(stop) then
                     next_state=off
+           
     
     end case
 

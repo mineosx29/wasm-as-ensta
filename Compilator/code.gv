@@ -11,6 +11,8 @@ node [shape = circle];gauche;
 node [shape = circle];droite;
 off -> monte [ label = "haut"];
 off -> descend [ label = "bas"];
+off -> gauche [ label = "gauche"];
+off -> droite [ label = "droite"];
 monte -> off [ label = "stop"];
 descend -> off [ label = "stop"];
 }
