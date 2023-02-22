@@ -111,3 +111,69 @@ On va récuperer le programme .wasm généré grâce à la fonction fetch et ain
 On fait appel à la fonction codé en WAT avec la fonction exports qui permet d'appelé les fonction exporté. Ici, on veut addition 3+2. Dans la console du navigateur, nous devrons visualiser 5.
 
 <img src="images/add.png" >
+
+Exemple 2(plus complexe) : Programmation de factorielle en WebAssembly Text : 
+
+```
+(func $fac_loop 
+      (param $n i32)
+      (result i32)
+      (local $i i32)
+      (local $fac i32)
+  i32.const 2
+  local.get $n
+  i32.ge_s
+  if (result i32)
+    local.get $n
+    return
+  else
+    i32.const 1
+    local.set $fac
+    i32.const 2
+    local.set $i
+
+    loop
+      local.get $i
+      local.get $fac
+      i32.mul
+      local.set $fac
+
+      local.get $i
+      i32.const 1
+      i32.add
+      local.set $i
+
+      local.get $n
+      local.get $i
+      i32.ge_s
+      br_if 0
+    end
+
+    local.get $fac
+    return
+  end)
+  (export "fac_loop" (func $fac_loop))
+```
+
+Dans ce programme, la fonction mathématique factorielle a été programmé.
+
+On compile le programme la commande wat2wasm et on effectue le même processus que pour l'addition.
+
+On fait un factorielle de 6  : 
+```Javascript
+fetch("test.wasm")
+    .then(response => response.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes))
+    .then(response => {
+        let result = response.instance.exports.fac_loop(6);
+        console.log(result);
+    });
+```
+On voit bien que le résultat est bon : 720
+
+
+<img src="images/factorielle.png">
+
+Dans cette partie, nous avons vu ce qu'est le WebAssembly et à quoi ça sert en général. Nous avons également vu sa représentation textuelle. 
+
+Dans la prochaine partie, nous allons la relation du WebAssembly avec les langages de haut niveau.

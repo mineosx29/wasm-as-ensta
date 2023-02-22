@@ -32,14 +32,12 @@ func GetString(elem string, value string) string {
 func main() {
 	quit := make(chan struct{}, 0)
 	const (
-	off State = iota
+	ouvert State = iota
 
-	monte
-	descend
-	gauche
-	droite
+	fermee
+	milieu
 )
-	state := off
+	state := ouvert
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	image := js.Global().Get("document").Call("getElementById", "image")
 	image.Set("src", "code2.png")
@@ -47,46 +45,67 @@ func main() {
 	cb = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 	commande = GetString("in", "value")
 
-		if state == off {
+		if state == ouvert {
 
-			if commande == "haut" {
-				fmt.Print(" Passage à Etat : monte")
-				state = monte
+			if commande == "btn1" {
+				fmt.Println(" Passage à Etat : ouvert")
+				state = ouvert
 				}
 		}
-		if state == off {
+		if state == ouvert {
 
-			if commande == "bas" {
-				fmt.Println(" Passage à Etat : descend")
-				state = descend
+			if commande == "btn2" {
+				fmt.Println(" Passage à Etat : fermee")
+				state = fermee
 				}
 		}
-		if state == off {
+		if state == ouvert {
 
-			if commande == "gauche" {
-				fmt.Println(" Passage à Etat : gauche")
-				state = gauche
+			if commande == "btn3" {
+				fmt.Println(" Passage à Etat : milieu")
+				state = milieu
 				}
 		}
-		if state == off {
+		if state == fermee {
 
-			if commande == "droite" {
-				fmt.Println(" Passage à Etat : droite")
-				state = droite
+			if commande == "btn1" {
+				fmt.Println(" Passage à Etat : ouvert")
+				state = ouvert
 				}
 		}
-		if state == monte {
+		if state == fermee {
 
-			if commande == "stop" {
-				fmt.Println(" Passage à Etat : off")
-				state = off
+			if commande == "btn2" {
+				fmt.Println(" Passage à Etat : fermee")
+				state = fermee
 				}
 		}
-		if state == descend {
+		if state == fermee {
 
-			if commande == "stop" {
-				fmt.Println(" Passage à Etat : off")
-				state = off
+			if commande == "btn3" {
+				fmt.Println(" Passage à Etat : milieu")
+				state = milieu
+				}
+		}
+		if state == milieu {
+
+			if commande == "btn1" {
+				fmt.Println(" Passage à Etat : ouvert")
+				state = ouvert
+				}
+		}
+		if state == milieu {
+
+			if commande == "btn2" {
+				fmt.Println(" Passage à Etat : fermee")
+				state = fermee
+				}
+		}
+		if state == milieu {
+
+			if commande == "btn3" {
+				fmt.Println(" Passage à Etat : milieu")
+				state = milieu
 				}
 		}
 			return nil

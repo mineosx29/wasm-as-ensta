@@ -1,34 +1,36 @@
 begin automate : 
-    input = haut;bas;gauche;droite
+    input = btn1;btn2;btn3
     
-    state = off,monte, descend,gauche,droite
+    state = ouvert,fermee, milieu
 
-    case off:
+    case ouvert:
         begin:
-            if (haut) then
-                     next_state=monte
-            if (bas) then
-                     next_state=descend
-            if (gauche) then
-                     next_state=gauche
-            if (droite) then
-                     next_state=droite
+            if (btn1) then
+                     next_state=ouvert
+            if (btn2) then 
+                     next_state=fermee
+            if (btn3) then
+                     next_state=milieu
     end case
 
-    case monte:
+    case fermee:
     	begin:
-        	if(stop) then
-            		next_state=off
-            
-        	
+        	if (btn1) then
+                     next_state=ouvert
+            if (btn2) then 
+                     next_state=fermee
+            if (btn3) then
+                     next_state=milieu	
     end case
     
-   case descend:
+   case milieu:
     	begin:
-        	if(stop) then
-                    next_state=off
-           
-    
-    end case
+        	if (btn1) then
+                     next_state=ouvert
+            if (btn2) then 
+                     next_state=fermee
+            if (btn3) then
+                     next_state=milieu       
+     end case
 
 end
