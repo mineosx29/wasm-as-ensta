@@ -4,4 +4,4 @@ mv fsm.go ../cmd/wasm/
 cd ../assets/
 make fsm
 
-
+# Renommer main.py 

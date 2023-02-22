@@ -5,6 +5,15 @@ Dans le cadre du module Application Système du semestre 5 à l'ENSTA Bretagne, 
 
 Dans ce rapport, je vais vous présenter le WebAssembly. En première partie, je vais présenter les généralité, puis en seconde partie, la proximité du WebAssembly avec les langages de haut niveau puis en troisième partie, vous présenter mon simulateur de machine à état finis et vous expliquer comment il fonctionne et pour finir, une conclusion.
 
+## Historique 
+En 1995, Javascript était créé en l’espace de 10 jours par Brendan Eich. Et à ce moment précis, Javascript c’était pas du tout désigné pour être rapide. Sortie de la validation de formulaires c’est l’enfer comme c’est lent. Au fur et à mesure du temps ça s’arrangeait, mais à cette époque, Javascript jouait avec son caca côté performance.
+
+En 2008, Google est sorti de nulle part et a posé sur la table son nouveau navigateur : Google Chrome. À l’intérieur de Chrome se trouvait un moteur Javascript appelé V8. Et la révolution de V8 c’était la compilation Just in Time (JIT) du Javascript. Ce changement de code interprété à la compilation JIT accélérait monstrueusement les performances de Javascript, et donc des navigateurs de façon générale. Cette vitesse allait permettre la naissance de technologie comme NodeJS ou Électron et l’explosion de popularité de Javascript.
+
+En 2015, WebAssembly est pour la première fois annoncé avec une petite démo d’un jeu qui tourne sous Unity. Le jeu tourne directement dans le navigateur.
+
+En 2019, la W3C faisait de WebAssembly une nouvelle norme du web. Comme l’a été le moteur V8 à son époque, WebAssembly s’annonce comme la nouvelle révolution coté performance. WebAssembly est donc déjà là, et son top départ a été fulgurant.
+
 ## Qu'est ce que le WebAssembly ?
 Le WebAssembly(abrégé WASM) est un nouveau type de code pouvant s'executer sur les navigateur web et peut donner des nouvelles fonctionnalités.
 Ce type est principalement développé par le [W3C Community Group](https://www.w3.org/community/webassembly/). Le WebAssembly est principalement intégré dans les navigateur connu d'aujourd'hui : Firefox, Chrome, Opera, Safari.

@@ -38,6 +38,7 @@ func main() {
 	milieu
 )
 	state := ouvert
+
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	image := js.Global().Get("document").Call("getElementById", "image")
 	image.Set("src", "code2.png")
