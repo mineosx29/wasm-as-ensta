@@ -18,7 +18,7 @@ begin automate :
         	if (btn1) then
                      next_state=ouvert
             if (btn2) then 
-                     next_state=fermee
+                     next_state=fermee 
             if (btn3) then
                      next_state=milieu	
     end case
