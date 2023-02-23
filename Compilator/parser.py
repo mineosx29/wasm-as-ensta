@@ -56,12 +56,14 @@ class Parser:
             declara.append(astClass.Variable(ident_id, ty))
             while self.showNext().kind == "SEMICOLON":
                 self.acceptIt()
-                ident_id = astClass.Ident(self.showNext().value)
+                value = self.showNext().value
+                ident_id = astClass.Ident(value)
                 self.expect("IDENTIFIER")
                 declara.append(astClass.Variable(ident_id, ty))
             while self.showNext().kind == "COMMA":
                 self.acceptIt()
-                ident_id = astClass.Ident(self.showNext().value)
+                value = self.showNext().value
+                ident_id = astClass.Ident(value)
                 self.expect("IDENTIFIER")
                 declara.append(astClass.Variable(ident_id, ty))
         return declara
@@ -73,7 +75,8 @@ class Parser:
         while self.showNext().kind == "CASE":
             self.acceptIt()
             print(self.showNext().kind)
-            ident_id = astClass.Ident(self.showNext().value)
+            value = self.showNext().value
+            ident_id = astClass.Ident(value)
             self.expect("IDENTIFIER")
             etats = astClass.Etats(ident_id)
             self.expect("COLON")

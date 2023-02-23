@@ -1,19 +1,13 @@
 digraph automate{
 rankdir=LR;
 size="8,5"
-node [shape = doublecircle];ouvert;
+node [shape = doublecircle];eteint;
 node [shape = point ]; qi
 node [shape = circle];
-qi -> ouvert;
-node [shape = circle];fermee;
-node [shape = circle];milieu;
-ouvert -> ouvert [ label = "btn1"];
-ouvert -> fermee [ label = "btn2"];
-ouvert -> milieu [ label = "btn3"];
-fermee -> ouvert [ label = "btn1"];
-fermee -> fermee [ label = "btn2"];
-fermee -> milieu [ label = "btn3"];
-milieu -> ouvert [ label = "btn1"];
-milieu -> fermee [ label = "btn2"];
-milieu -> milieu [ label = "btn3"];
+qi -> eteint;
+node [shape = circle];allume;
+eteint -> allume [ label = "active"];
+eteint -> eteint [ label = "desactive"];
+allume -> eteint [ label = "desactive"];
+allume -> allume [ label = "active"];
 }

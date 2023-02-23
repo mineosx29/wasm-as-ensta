@@ -32,12 +32,11 @@ func GetString(elem string, value string) string {
 func main() {
 	quit := make(chan struct{}, 0)
 	const (
-	ouvert State = iota
+	eteint State = iota
 
-	fermee
-	milieu
+	allume
 )
-	state := ouvert
+	state := eteint
 
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	image := js.Global().Get("document").Call("getElementById", "image")
@@ -46,67 +45,32 @@ func main() {
 	cb = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 	commande = GetString("in", "value")
 
-		if state == ouvert {
+		if state == eteint {
 
-			if commande == "btn1" {
-				fmt.Println(" Passage à Etat : ouvert")
-				state = ouvert
+			if commande == "active" {
+				fmt.Println(" Passage à Etat : allume")
+				state = allume
 				}
 		}
-		if state == ouvert {
+		if state == eteint {
 
-			if commande == "btn2" {
-				fmt.Println(" Passage à Etat : fermee")
-				state = fermee
+			if commande == "desactive" {
+				fmt.Println(" Passage à Etat : eteint")
+				state = eteint
 				}
 		}
-		if state == ouvert {
+		if state == allume {
 
-			if commande == "btn3" {
-				fmt.Println(" Passage à Etat : milieu")
-				state = milieu
+			if commande == "desactive" {
+				fmt.Println(" Passage à Etat : eteint")
+				state = eteint
 				}
 		}
-		if state == fermee {
+		if state == allume {
 
-			if commande == "btn1" {
-				fmt.Println(" Passage à Etat : ouvert")
-				state = ouvert
-				}
-		}
-		if state == fermee {
-
-			if commande == "btn2" {
-				fmt.Println(" Passage à Etat : fermee")
-				state = fermee
-				}
-		}
-		if state == fermee {
-
-			if commande == "btn3" {
-				fmt.Println(" Passage à Etat : milieu")
-				state = milieu
-				}
-		}
-		if state == milieu {
-
-			if commande == "btn1" {
-				fmt.Println(" Passage à Etat : ouvert")
-				state = ouvert
-				}
-		}
-		if state == milieu {
-
-			if commande == "btn2" {
-				fmt.Println(" Passage à Etat : fermee")
-				state = fermee
-				}
-		}
-		if state == milieu {
-
-			if commande == "btn3" {
-				fmt.Println(" Passage à Etat : milieu")
-				state = milieu
+			if commande == "active" {
+				fmt.Println(" Passage à Etat : allume")
+				state = allume
 				}
 		}
 			return nil
