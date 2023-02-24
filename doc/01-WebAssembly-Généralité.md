@@ -31,7 +31,7 @@ Cependant, il faut noter que le WebAssembly possède une representation textuell
 
 Pour que le WebAssembly soit lu et edité par les hommes, le WAT, le format textuelle a été développé. 
 
-Sa s-expression: 
+Nous allons voir sa s-expression et la syntaxe du langage: 
 
 La principale unité de code dans le WebAssembly est un module.
 
@@ -64,7 +64,7 @@ Signature et paramètres :
 | f32       | 32bit float   |
 | f64       | 64bit float   |
 
-Il existe plusieurs commandes pour récupérer des valeurs des paramètres.En effet, les commandes local.get/local.set font référence à l'élément à obtenir/à définir par son index numérique : les paramètres sont mentionnés en premier, dans l'ordre de leur déclaration, suivis des locaux dans l'ordre de leur déclaration.
+Il existe plusieurs commandes pour récupérer des valeurs des paramètres. En effet, les commandes local.get/local.set font référence à l'élément à obtenir/à définir par son index numérique : les paramètres sont mentionnés en premier, dans l'ordre de leur déclaration, suivis des locaux dans l'ordre de leur déclaration.
 
 Voici un exemple : 
 ```
@@ -79,7 +79,7 @@ Le principe est simple : ici, on veut récupérer la valeur du paramètre i32, l
 
 A la compilation, nous pouvons lire le fichier wasm et on pourra distinguer des données binaire:
 
-<img src="images/binaire.png" width="80"> 
+<img src="images/dump.png"> 
 
 Les données sont pricipalement de l'héxadécimale. Cependant, il est impossible pour l'homme de debugguer ou modifier le programme à partir de ce binaire. Il faut aller dans le format textuelle pour pouvoir faire des modifications.
 
