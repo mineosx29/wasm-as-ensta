@@ -102,3 +102,8 @@ Ainsi, nous obtenons un fichier wasm prêt à l'emploi :
 
 <img src="images/go_test.png">
 
+Pour les autres langages, le principe de fonctionnement reste globalement le même.
+
+Dans cette partie, nous avons vu que avec les langages de haut niveaux comme le C/C++, le GO, Python, Rust, etc.. nous pouvons générer du WebAssembly. Nous avons également démontrer l'avantage de programmer avec les langages de haut niveau par rapport au format Textuelle du WebAssembly. Nous avons également vu les chaîne de fonctionnement qui permettent de compiler des programmes codés avec des langages de hauts niveaux vers du wasm.
+
+Dans la prochaine partie, nous allons voir le fonctionnement d'un simulateur de FSM que j'ai moi-même programmé.
