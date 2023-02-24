@@ -7,6 +7,8 @@ Une machine à état finis est une machine qui est susceptible d'être dans un n
 On rencontre de nombreuses FSM dans la vie quotidienne : un distributeur automatique, un ascenseur, un digicode etc...
 
 Voici un exemple de machine à état finis : 
+
+
 <img src="images/FSM.png">
 
 # Application : Simulateur de FSM
