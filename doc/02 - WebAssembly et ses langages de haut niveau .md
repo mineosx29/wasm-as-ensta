@@ -41,5 +41,64 @@ Nous avons vu dans cette partie que les langages de haut niveaux restent le meil
   
 Nous avons vu que nous pouvons générer du WebAssembly à partir de langages de hauts niveaux. Mais comment cela fonctionne t-il ?
 
-Les langages de haut niveaux possède
+Les langages de haut niveaux possède des compilateur qui peuvent prendre comme cible le WebAssembly. En effet, lorsqu'un utilisateur fait un programme en C++, Python ou en GO, l'utilisateur peut compiler avec des compilateur fait pour compiler vers WASM. Nous allons voir les différents compilateurs qui existe pour compiler vers WASM. Ici, nous en présenterons pour 3 langages : C/C++, Python et le langage GO.
+
+- C/C++:
+
+Le compilateur utilisé pour générer du wasm à partir du C/C+ est emscripten.
+
+<img src="images/Emscripten_logo_full.png">
+
+Emscripten est un compilateur LLVM(Low Level Virtual Machine) qui permet de compiler un programme C/C++ vers du WebAssembly. Ainsi, en sortie de compilation, un fichier .wasm est obtenu et prêt à être éxecuté. Voici un aperçu de la chaîne de fonctionnement global pour compiler un programme C/C++ vers du WASM.
+
+<img src="images/emscripten.png"> 
+
+Pour ce cas, on code un programme en C++ en faisant un simple Hello World : 
+```C++
+#include <iostream>
+
+int main() {
+	std::cout << "Hello World" << std::endl;
+	return 0;
+}
+```
+
+Après avoir fait ce programme, on peut compiler avec emscripten en faisant : 
+```bash
+emcc test.cpp -s WASM=1 -o test.html
+```
+Emscripten va générer une page html ainsi qu'un fichier wasm : 
+<img src="images/emcc2.png">
+
+Ainsi, on obtient un fichier wasm prêt à l'emploi.
+
+- Go : 
+
+Le compilateur qui permet de générer du wasm à partir du langage GO est le compilateur GO lui même. En effet, les développeur du langage Go ont intégré dans le compilateur officiel de GO une nouvelle cible de compilation : le wasm.
+
+<img src="images/GO.png">
+
+Pour ce cas, on code un programme GO qui fait un simple affichage dans la console du navigateur un texte : "Test" et nommera ce programme test.go: 
+```GO
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	quit := make(chan struct{}, 0)
+
+	fmt.Println("Test")
+	
+	<-quit
+}
+```
+Pour compiler ce programme vers du WASM, il faut entrer cette commande suivante : 
+```bash
+GOOS=js GOARCH=wasm go build -o test.wasm test.go
+```
+Ainsi, nous obtenons un fichier wasm prêt à l'emploi : 
+
+<img src="images/go_test.png">
 

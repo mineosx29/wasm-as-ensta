@@ -37,7 +37,6 @@ func main() {
 	allume
 )
 	state := eteint
-
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	image := js.Global().Get("document").Call("getElementById", "image")
 	image.Set("src", "code2.png")
@@ -54,14 +53,21 @@ func main() {
 		}
 		if state == eteint {
 
-			if commande == "desactive" {
+			if commande == "yo" {
 				fmt.Println(" Passage à Etat : eteint")
 				state = eteint
 				}
 		}
+		if state == eteint {
+
+			if commande == "hein" {
+				fmt.Println(" Passage à Etat : allume")
+				state = allume
+				}
+		}
 		if state == allume {
 
-			if commande == "desactive" {
+			if commande == "yo" {
 				fmt.Println(" Passage à Etat : eteint")
 				state = eteint
 				}
@@ -71,6 +77,13 @@ func main() {
 			if commande == "active" {
 				fmt.Println(" Passage à Etat : allume")
 				state = allume
+				}
+		}
+		if state == allume {
+
+			if commande == "hein" {
+				fmt.Println(" Passage à Etat : eteint")
+				state = eteint
 				}
 		}
 			return nil

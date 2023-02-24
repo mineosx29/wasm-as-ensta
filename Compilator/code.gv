@@ -7,7 +7,9 @@ node [shape = circle];
 qi -> eteint;
 node [shape = circle];allume;
 eteint -> allume [ label = "active"];
-eteint -> eteint [ label = "desactive"];
-allume -> eteint [ label = "desactive"];
+eteint -> eteint [ label = "yo"];
+eteint -> allume [ label = "hein"];
+allume -> eteint [ label = "yo"];
 allume -> allume [ label = "active"];
+allume -> eteint [ label = "hein"];
 }
