@@ -33,10 +33,11 @@ func main() {
 	quit := make(chan struct{}, 0)
 	const (
 	eteint State = iota
-	state := eteint
 
 	allume
 )
+	state := eteint
+
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	image := js.Global().Get("document").Call("getElementById", "image")
 	image.Set("src", "code2.png")
@@ -51,37 +52,9 @@ func main() {
 				state = allume
 				}
 		}
-		if state == eteint {
-
-			if commande == "yo" {
-				fmt.Println(" Passage à Etat : eteint")
-				state = eteint
-				}
-		}
-		if state == eteint {
-
-			if commande == "hein" {
-				fmt.Println(" Passage à Etat : allume")
-				state = allume
-				}
-		}
 		if state == allume {
 
-			if commande == "yo" {
-				fmt.Println(" Passage à Etat : eteint")
-				state = eteint
-				}
-		}
-		if state == allume {
-
-			if commande == "active" {
-				fmt.Println(" Passage à Etat : allume")
-				state = allume
-				}
-		}
-		if state == allume {
-
-			if commande == "hein" {
+			if commande == "desactive" {
 				fmt.Println(" Passage à Etat : eteint")
 				state = eteint
 				}

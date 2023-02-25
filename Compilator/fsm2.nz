@@ -1,5 +1,5 @@
-begin dhuzhduz : 
-    input = active;yo;hein
+begin lampe : 
+    input = active;desactive
     
     state = eteint,allume
 
@@ -7,20 +7,12 @@ begin dhuzhduz :
         begin:
             if (active) then
                      next_state=allume
-            if (yo) then 
-                     next_state=eteint
-            if (hein) then 
-                     next_state=allume
-            
+                        
     end case
 
     case allume:
     	begin:
-        	if (yo) then
-                     next_state=eteint
-            if (active) then 
-                     next_state=allume
-            if (hein) then 
+        	if (desactive) then
                      next_state=eteint 
             	
     end case

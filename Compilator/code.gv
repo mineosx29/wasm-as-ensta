@@ -1,4 +1,4 @@
-digraph dhuzhduz{
+digraph lampe{
 rankdir=LR;
 size="8,5"
 node [shape = doublecircle];eteint;
@@ -7,9 +7,5 @@ node [shape = circle];
 qi -> eteint;
 node [shape = circle];allume;
 eteint -> allume [ label = "active"];
-eteint -> eteint [ label = "yo"];
-eteint -> allume [ label = "hein"];
-allume -> eteint [ label = "yo"];
-allume -> allume [ label = "active"];
-allume -> eteint [ label = "hein"];
+allume -> eteint [ label = "desactive"];
 }
