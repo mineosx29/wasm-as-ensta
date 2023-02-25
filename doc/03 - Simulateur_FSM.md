@@ -95,7 +95,8 @@ Ci-dessus, nous définissons une expression régulière pour chaque mot clé du 
 
 Ensuite le lexer va séparer le langage source en lexèmes et voir si chaque lexème correspond à une des expressions régulières définit ci-dessus. C’est qu’on appelle l’analyse lexicale.
 
-Voici le diagramme UML du lexer : 
+Voici le diagramme UML du lexer :    
+
 <img src="images/lexerClass.png">
 
 Ensuite viens l'étape de l'analyse syntaxique : 
