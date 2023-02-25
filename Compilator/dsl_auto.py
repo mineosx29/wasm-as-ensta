@@ -8,7 +8,7 @@ import generatorGo
 import argparse
 
 
-class Compile:
+class DSLAuto:
 
     def compile(self, inputFile = None, outputFile = None, outputFileDot = None):
         if outputFile != "fsm.go":
@@ -28,7 +28,7 @@ class Compile:
         print("Process End")
 
 if __name__ == "__main__":
-    parse = argparse.ArgumentParser(description="This Compilator compiles a program and Generates DOT FSM and a FSM in GO Langages", epilog="This Compilator realized in AS Courses")
+    parse = argparse.ArgumentParser(description="DSLAuto is a Compilator which compiles a program and Generates DOT FSM and a FSM in GO Langages", epilog="This Compilator realized in AS Courses")
     parse.add_argument("-i","--inputFile", help="input Auto Code", required=True)
     parse.add_argument("-oDot","--outputFileDot", help="gv DOT Code output File", required=True)
     parse.add_argument("-oGO","--outputFileGo", help="Go Code output File", required=True)
@@ -36,5 +36,5 @@ if __name__ == "__main__":
     args = parse.parse_args()
 
 
-    compile = Compile()
-    compile.compile(args.inputFile, args.outputFileGo, args.outputFileDot)
+    dsl_auto = DSLAuto()
+    dsl_auto.compile(args.inputFile, args.outputFileGo, args.outputFileDot)
