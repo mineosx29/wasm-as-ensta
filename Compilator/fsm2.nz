@@ -7,7 +7,7 @@ begin lampe :
         begin:
             if (active) then
                      next_state=allume
-                        
+                                    
     end case
 
     case allume:

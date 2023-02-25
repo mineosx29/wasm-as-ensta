@@ -12,7 +12,7 @@ class GeneratorDot:
         self.file.write("rankdir=LR;\n")
         self.file.write("size=\"8,5\"\n")
         for declaration in auto.declarations:
-            print(declaration)
+            #print(declaration)
             declaration.accept(self)
         for etat in auto.etats:
             etat.accept(self)
@@ -25,7 +25,7 @@ class GeneratorDot:
         variable.ident.accept(self)
 
     def visitIdent(self,ident):
-        print("IDENT")
+        #print("IDENT")
         if self.ecriture_etat == 1:
             if self.etat_initial:
                 self.file.write("node [shape = doublecircle];"+ ident.tok+";\n")
@@ -56,7 +56,7 @@ class GeneratorDot:
             condition.accept(self)
 
     def visitIF(self,if_):
-        print("IF")
+        #print("IF")
         self.file.write(self.actual_state)
         self.assignmement_etat=1
         self.file.write(" -> ")

@@ -38,7 +38,7 @@ class Parser:
         auto = astClass.Auto(value)
         auto.declarations = self.parse_declarations()
         auto.etats = self.parse_etats()
-        print(self.showNext().value)
+        #print(self.showNext().value)
         self.expect("END")
         return auto
 
@@ -74,7 +74,7 @@ class Parser:
         etatss = []
         while self.showNext().kind == "CASE":
             self.acceptIt()
-            print(self.showNext().kind)
+            #print(self.showNext().kind)
             value = self.showNext().value
             ident_id = astClass.Ident(value)
             self.expect("IDENTIFIER")

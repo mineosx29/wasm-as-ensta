@@ -14,6 +14,7 @@ class DSLAuto:
         if outputFile != "fsm.go":
             print("Error, the file must be called fsm.go")
             exit()
+        print("-*-*-*-*-*-*-*-*-*-*-*-*-*-DSL AUTO COMPILER-*-*-*-*-*-*-*-*-*-*-*-*-*-\n")
         print("Lexer Module Starting ....")
         lexer_file = Lexer_Compilator()
         tok = lexer_file.lexer(inputFile)
@@ -26,6 +27,7 @@ class DSLAuto:
         generatorCodeGo = generatorGo.GeneratorGo()
         gen = generatorCodeGo.visitAuto(ast, outputFile)
         print("Process End")
+        print("-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-")
 
 if __name__ == "__main__":
     parse = argparse.ArgumentParser(description="DSLAuto is a Compilator which compiles a program and Generates DOT FSM and a FSM in GO Langages", epilog="This Compilator realized in AS Courses")

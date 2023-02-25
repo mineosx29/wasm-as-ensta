@@ -28,7 +28,7 @@ class GeneratorGo:
         self.file.write("func main() {\n")
         self.file.write("\tquit := make(chan struct{}, 0)\n")
         for declaration in auto.declarations:
-            print(declaration)
+            #print(declaration)
             declaration.accept(self)
         self.file.write(")\n")
         self.file.write("\tbutton := js.Global().Get(\"document\").Call(\"getElementById\", \"ok\")\n") 
@@ -55,7 +55,7 @@ class GeneratorGo:
 
 
     def visitIdent(self,ident):
-        print("IDENT")
+        #print("IDENT")
         if self.ecriture_etat == 1:
             if self.etat_initial == 1:
                 self.file.write("\tconst (\n\t"+ ident.tok+" State = iota\n")
@@ -97,7 +97,7 @@ class GeneratorGo:
             condition.accept(self)
     
     def visitIF(self,if_):
-        print("IF")
+        #print("IF")
         self.file.write("\t\tif state == ")
         self.file.write(self.actual_state + " {\n")
         self.file.write("\n\t")
