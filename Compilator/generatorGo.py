@@ -119,11 +119,6 @@ class GeneratorGo:
 
     def visitBinary(self,binary):
         binary.lhs.accept(self)
-        # if binary.op is None and binary.rhs is None:
-        #     pass
-        # else:
-        #     self.file.write(' '+binary.op+' ')
-        #     binary.rhs.accept(self) 
         if binary.op and binary.rhs:
             self.file.write(' '+binary.op+' ')
             binary.rhs.accept(self)

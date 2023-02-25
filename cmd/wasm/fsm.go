@@ -33,10 +33,10 @@ func main() {
 	quit := make(chan struct{}, 0)
 	const (
 	eteint State = iota
+	state := eteint
 
 	allume
 )
-	state := eteint
 	button := js.Global().Get("document").Call("getElementById", "ok")
 	image := js.Global().Get("document").Call("getElementById", "image")
 	image.Set("src", "code2.png")

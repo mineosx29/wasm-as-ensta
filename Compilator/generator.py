@@ -1,10 +1,10 @@
 class GeneratorDot:
     def __init__(self):
-        self.write_state_ident=False
-        self.write_state_cond=False
-        self.write_state_assignment=False
-        self.save_actual_state=False
-        self.initial_state=True
+        self.ecriture_etat=0
+        self.etat_condition=0
+        self.assignmement_etat=0
+        self.etat_actuel_backup=0
+        self.etat_initial=1
 
     def visitAuto(self,auto,file):
         self.file=open(file,"w")
@@ -26,31 +26,31 @@ class GeneratorDot:
 
     def visitIdent(self,ident):
         print("IDENT")
-        if self.write_state_ident:
-            if self.initial_state:
+        if self.ecriture_etat == 1:
+            if self.etat_initial:
                 self.file.write("node [shape = doublecircle];"+ ident.tok+";\n")
                 self.file.write("node [shape = point ]; qi\n")
                 self.file.write("node [shape = circle];\n");
                 self.file.write("qi -> "+ident.tok+";\n");
-                self.initial_state=False
+                self.etat_initial=0
             else:
                 self.file.write("node [shape = circle];"+ ident.tok+";\n")
-            self.write_state_ident=False
-        if self.write_state_cond:
+            self.ecriture_etat=0
+        if self.etat_condition == 1:
             self.file.write(ident.tok)
-        if self.write_state_assignment:
+        if self.assignmement_etat == 1:
             self.file.write(ident.tok)
-            self.write_state_assignment=False
-        if self.save_actual_state:
+            self.assignmement_etat=0
+        if self.etat_actuel_backup == 1:
             self.actual_state=ident.tok
-            self.save_actual_state=False
+            self.etat_actuel_backup=0
 
     def visitType(self,type):
         if type.tok=="state":
-            self.write_state_ident=True
+            self.ecriture_etat=1
 
     def visitEtats(self,etats):
-        self.save_actual_state=True
+        self.etat_actuel_backup=1
         etats.ident.accept(self)
         for condition in etats.condition:
             condition.accept(self)
@@ -58,20 +58,18 @@ class GeneratorDot:
     def visitIF(self,if_):
         print("IF")
         self.file.write(self.actual_state)
-        self.write_state_assignment=True
+        self.assignmement_etat=1
         self.file.write(" -> ")
         if_.assign.accept(self)  
-        self.write_state_cond=True
+        self.etat_condition=1
         self.file.write(" [ label = \"")
         if_.condition.accept(self)
-        self.write_state_cond=False
+        self.etat_condition=0
         self.file.write("\"];\n")
 
     def visitBinary(self,binary):
         binary.lhs.accept(self)
-        if binary.op is None and binary.rhs is None:
-            pass
-        else:
+        if binary.op and binary.rhs:
             self.file.write(' '+binary.op+' ')
             binary.rhs.accept(self) 
 

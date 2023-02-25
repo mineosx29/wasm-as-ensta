@@ -1,4 +1,4 @@
-begin automate : 
+begin dhuzhduz : 
     input = active;yo;hein
     
     state = eteint,allume
