@@ -58,6 +58,11 @@ Le compilateur DSL_Auto se décompose en trois partie :
 - Un parser : elle va vérifier que la suite de lexèmes obtenu grâce au lexer correspond à la grammaire de notre langage source. Cette partie va également concevoir l’arbre de syntaxe abstraite.
 - Un visiteur : C’est notre design pattern. Il va principalement visiter l’arbre de syntaxe abstraite. Le visiteur est directement intégré dans le générateur de code.
 
+Ci-dessous, un diagramme décrivant l'architecture du compilateur : 
+
+<img src="images/compilator.png">    
+
+
 Tout d'abord, il y a l'analyse lexical :    
 En effet, une expression régulière est une chaine de caractère qui décrit, selon une syntaxe précise, un ensemble de chaîne de caractère possible.
 L’analyse lexical sert à découper le code source en mots ou lexème et ensuite vérifier avec les expressions régulières que ces mots correspondent au dictionnaire du langage source.    
