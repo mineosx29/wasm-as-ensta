@@ -1,2 +1,0 @@
-eteint -> allume [ label = "active"];
-allume -> eteint [ label = "desactive"];

@@ -314,4 +314,17 @@ go run main.go
 
 Let's Test ! 
 
-Aller à l'adresse https://localhost:9090 puis testez ! 
+Aller à l'adresse https://localhost:9090 puis testez !
+
+<img src="images/test.png">
+
+## Piste pour générer l'animation
+
+Par manque de temps, je n'ai pas pu mettre en oeuvre la génération d'animation du diagramme automate. Cependant, j'ai des pistes pour mettre en oeuvre une animation qui indique l'état courant de l'automate.
+
+On peut générer à partir du générateur une animation Canvas qui indique l'état courant de l'automate. 
+En effet, L'élément canvas est un composant du langage Web HTML qui permet d'effectuer des rendus dynamiques d'images bitmap en utilisant des scripts dans des langages tels que le javascript. 
+
+Canvas est également supporté par le langage Go. On peut donc générer une animation canvas qui indique l'état courant de l'automate à partir du compilateur.
+
+Nous pouvons donc créer un élément HTML(un canvas) à partir du langage Go en communiquant avec le DOM(Document Object Model) et générer le tout à partir du compilateur.

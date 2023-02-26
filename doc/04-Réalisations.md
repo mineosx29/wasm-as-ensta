@@ -15,7 +15,7 @@
 ###  Améliorations à apporter
 | Etat | Fonctions |
 |------|----------|
-|:red_square:| Animation de l'automate (Animation du diagramme Automate + animation fonctionnement)
-|:orange_square:| Enrichissement du langage pour permettre d'animer
-
+|:red_square:| Animation de l'automate (Animation du diagramme Automate + animation du fonctionnement)
+|:orange_square:| Enrichissement du langage pour permettre d'animer et elargir le champ des possibles.
+|:orange_square:| Correction bug du GénérateurGO
 

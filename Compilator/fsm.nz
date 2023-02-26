@@ -1,0 +1,31 @@
+begin lampe : 
+    input = active;desactive,eco
+    
+    state = eteint,allume,eco
+
+    case eteint:
+        begin:
+            if (active) then
+                     next_state=allume
+                                    
+    end case
+
+    case allume:
+    	begin:
+        	if (desactive) then
+                     next_state=eteint
+            if (eco) then  
+                     next_state=eco
+            	
+    end case
+    
+    case eco:
+    	begin:
+        	if (desactive) then
+                     next_state=eteint
+            if (not(eco)) then
+                     next_state=allume
+            	
+    end case
+
+end

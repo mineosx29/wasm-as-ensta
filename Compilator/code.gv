@@ -6,6 +6,10 @@ node [shape = point ]; qi
 node [shape = circle];
 qi -> eteint;
 node [shape = circle];allume;
+node [shape = circle];eco;
 eteint -> allume [ label = "active"];
 allume -> eteint [ label = "desactive"];
+allume -> eco [ label = "eco"];
+eco -> eteint [ label = "desactive"];
+eco -> allume [ label = "not(eco)"];
 }

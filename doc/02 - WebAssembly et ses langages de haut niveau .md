@@ -94,13 +94,58 @@ func main() {
 	<-quit
 }
 ```
-Pour compiler ce programme vers du WASM, il faut entrer cette commande suivante : 
+Pour compiler ce programme vers du WASM, il faut entrer les commandes suivantes : 
 ```bash
+cp -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" <vers_dossier_ou_se_situe_votre_fichier_wasm>
 GOOS=js GOARCH=wasm go build -o test.wasm test.go
 ```
+La première commande est nécessaire car WebAssembly existe avec le Javascript.
+
 Ainsi, nous obtenons un fichier wasm prêt à l'emploi : 
 
 <img src="images/go_test.png">
+
+Ensuite il faut créer une page html :   
+```html
+<html>  
+    <head>
+        <meta charset="utf-8"/>
+        <script src="wasm_exec.js"></script>
+        <script>
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("test.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        </script>
+    </head>
+<html>
+```
+Ici, on va instancier un module WebAssembly et exécuter tout simplement le fichier wasm qu'on a compilé.
+
+Ensuite, pour lancer le tout, il faut faire un serveur (nous nommerons le fichier main.go): 
+```Go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	err := http.ListenAndServe(":9090", http.FileServer(http.Dir("")))
+	if err != nil {
+		fmt.Println("Failed to start server", err)
+		return
+	}
+}
+```
+
+Ensuite entrez tout simplement la commande suivante pour lancer le serveur: 
+```bash
+go run main.go
+```
+Allez à l'adresse https://localhost:9090 pour voir le résultat ! 
+<img src="images/test2.png">
 
 Pour les autres langages, le principe de fonctionnement reste globalement le même.
 

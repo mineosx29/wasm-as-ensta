@@ -6,7 +6,7 @@ Dans le cadre du module Application Système du semestre 5 à l'ENSTA Bretagne, 
 Dans ce rapport, je vais vous présenter le WebAssembly. En première partie, je vais présenter les généralité, puis en seconde partie, la proximité du WebAssembly avec les langages de haut niveau puis en troisième partie, vous présenter mon simulateur de machine à état finis et vous expliquer comment il fonctionne et pour finir, une conclusion.
 
 ## Historique 
-En 1995, Javascript était créé en l’espace de 10 jours par Brendan Eich. Et à ce moment précis, Javascript c’était pas du tout désigné pour être rapide. Sortie de la validation de formulaires c’est l’enfer comme c’est lent. Au fur et à mesure du temps ça s’arrangeait, mais à cette époque, Javascript jouait avec son caca côté performance.
+En 1995, Javascript était créé en l’espace de 10 jours par Brendan Eich. Et à ce moment précis, Javascript c’était pas du tout désigné pour être rapide. Sortie de la validation de formulaires  c’est lent. Au fur et à mesure du temps ça s’arrangeait, mais à cette époque, Javascript jouait avec son caca côté performance.
 
 En 2008, Google est sorti de nulle part et a posé sur la table son nouveau navigateur : Google Chrome. À l’intérieur de Chrome se trouvait un moteur Javascript appelé V8. Et la révolution de V8 c’était la compilation Just in Time (JIT) du Javascript. Ce changement de code interprété à la compilation JIT accélérait monstrueusement les performances de Javascript, et donc des navigateurs de façon générale. Cette vitesse allait permettre la naissance de technologie comme NodeJS ou Électron et l’explosion de popularité de Javascript.
 
@@ -82,6 +82,12 @@ A la compilation, nous pouvons lire le fichier wasm et on pourra distinguer des 
 <img src="images/dump.png"> 
 
 Les données sont pricipalement de l'héxadécimale. Cependant, il est impossible pour l'homme de debugguer ou modifier le programme à partir de ce binaire. Il faut aller dans le format textuelle pour pouvoir faire des modifications.
+## Gestion de la mémoire   
+La pile d'exécution dans lequel WebAssembly s'exécute est séparé de la mémoire et donc la mémoire n'est pas accessible par le code.
+
+Le code WebAssembly ne peut pas accéder directement aux fonctions ou variables qui ne sont pas encore appelées, accéder à des adresses arbitraires ou exécuter des données en mémoire sous forme d’instructions de bytecode.
+
+Le module WASM possède que une mémoire "linéaire" dans lequel WebAssembly peut écrire ou lire dans cette mémoire ou demander l'augmentation de la taille de cette mémoire. De plus la mémoire linéaire est elle même isolé des zones où contiennent son code et sa pile d'éxecution.
 
 ## Exemple de programmes WebAssembly text 
 
