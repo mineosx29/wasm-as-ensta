@@ -20,7 +20,7 @@ Puis allez dans le dossier assets en faisant :
 ```bash
 cd ../assets
 ```
-Ne pas oublier de mettre la ligne state := à votre état après le bloc const dans le fichier Go généré avant de compiler.
+Ne pas oublier de mettre la ligne state := "etat" après le bloc const dans le fichier Go généré avant de compiler.
 
 Puis faire un make des Machine à Etats Finis que vous voulez simuler : 
 
