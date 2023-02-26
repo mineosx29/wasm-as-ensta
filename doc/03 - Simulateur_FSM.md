@@ -13,14 +13,14 @@ Voici un exemple de machine à état finis :
 
 # Application : Simulateur de FSM
 
-Dans le cadre du module Application Système, j'ai programmé un simulateur de machine à État Finis dans le but de montrer les possibilités du WebAssembly. En effet, avec l'accord de mon professeur Superviseur, j'ai décidé d'inventer un langage automate qui décrira une FSM. Ensuite, un compilateur que j'ai construit s'occupera de le compiler. Enfin à la sortie du compilateur, un diagramme automate sera crée ainsi qu'un programme en GO qui décrit la FSM.
+Dans le cadre du module Application Système, j'ai programmé un simulateur de machine à État Finis dans le but de montrer les possibilités du WebAssembly. En effet, avec l'accord de mon professeur Superviseur, j'ai décidé d'inventer un langage automate qui décrira une FSM. Ensuite, un compilateur que j'ai construit s'occupera de le compiler. Enfin à la sortie du compilateur, un diagramme automate sera crée ainsi qu'un programme en Go qui décrit la FSM. J'ai décidé de générer un langage de haut niveau et non le format textuelle du WebAssembly pour les mêmes raisons mentionnées dans la précedente partie.
 
 Voici la chaîne de fonctionnement : 
 
 <img src="images/compil.png">
 
 ## Le langage DSL_Auto : Syntaxe
-J'ai décidé de rapprocher la grammaire et la syntaxe du langage des langages de haut niveau pour faciliter l'apprentissage et la prise en main du langage.
+J'ai décidé de rapprocher la grammaire et la syntaxe du langage aux des langages de haut niveau pour faciliter l'apprentissage et la prise en main du langage.
 
 La syntaxe du langage DSL_Auto est la suivante : 
 ```
@@ -50,7 +50,7 @@ Etats -> {Etats}
 Etats -> "case" identifier ":" {conditions} 
 conditions -> if "identifier" then next_state=identifier   
 
-Nous avons vu la syntaxe et la grammaire du langage DSL_Auto. Le langage DSL_Auto va être compilé et à partir de ce langage va être généré le diagramme automate ainsi que le programme GO décrivant la FSM.
+Nous avons vu la syntaxe et la grammaire du langage DSL_Auto. Le langage DSL_Auto va être compilé et à partir de ce langage va être généré le diagramme automate ainsi que le programme Go décrivant la FSM.
 
 ## Fonctionnement du compilateur
 Le compilateur DSL_Auto se décompose en trois partie : 
@@ -111,9 +111,12 @@ L’analyse syntaxique dans un compilateur est une étape où le compilateur va 
 Voici le diagramme UML de l'analyseur syntaxique : 
 
 <img src="images/parserClass.png">
-L’analyseur syntaxique va viser deux objectifs dans notre compilateur :
-    • Vérifier que le code source respecte la grammaire préétablie du langage.
-    • Construire un arbre de syntaxe abstraite.
+L’analyseur syntaxique va viser deux objectifs dans notre compilateur :   
+
+- Vérifier que le code source respecte la grammaire préétablie du langage.     
+
+- Construire un arbre de syntaxe abstraite.   
+  
 Ici, nous utilisons dans notre analyseur syntaxique une analyse récursive descendante et nous utilisons généralement trois méthodes dans notre analyseur syntaxique et ces méthodes sont implémenté dans les méthodes parse_X également :    
 
 - La méthode expect() : elle va servir à consommer un lexème de type attendu.
@@ -151,7 +154,7 @@ def parse_declarations(self):
         return declara
 ```
 
-Ici la fonction va consommer un lexème courant : ce sera soit input soit state. Par la suite, la fonction s'attend à consommer un léxème de type ASSIGN soit un "=". Ensuite, la fonction s'attend à consommer un lexeme de type IDENTIFIER soit le nom de l'état ou de l'entrée. Si la fonction consomme un lexeme qui n'est pas ce qui est attendu, cela retournera une erreur avec la fonction expect(). Puis, deux choix de syntaxe s'offre à l'utilisateur, soit un ";" entre les identifiers, soit une ",". Et le meme processus se repetera.
+Ici la fonction va consommer un lexème courant : ce sera soit input soit state. Par la suite, la fonction s'attend à consommer un léxème de type ASSIGN soit un "=". Ensuite, la fonction s'attend à consommer un lexeme de type IDENTIFIER soit le nom de l'état ou de l'entrée. Si la fonction consomme un lexeme qui n'est pas ce qui est attendu, cela retournera une erreur avec la fonction expect(). Puis, deux choix de syntaxe s'offre à l'utilisateur, soit un ";" entre les identifiers, soit une ",". Et le même processus se repetera.
 
 Comme vous pouvez le voir dans la fonction, la fonction rempli l’arbre à chaque lexème consommé.
 Le principe s’applique aux autre fonctions parse_X().

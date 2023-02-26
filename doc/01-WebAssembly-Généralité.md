@@ -3,10 +3,10 @@
 ## Introduction
 Dans le cadre du module Application Système du semestre 5 à l'ENSTA Bretagne, plusieurs sujets ont été proposé. Un sujet m'a tout de suite intéressé : Le WebAssembly. J'ai pris ce sujet car c'était un sujet orienté recherche/découverte et la deuxième raison est que je ne connaissais pas du tout le WebAssembly et ma curiosité a pris le dessus. 
 
-Dans ce rapport, je vais vous présenter le WebAssembly. En première partie, je vais présenter les généralité, puis en seconde partie, la proximité du WebAssembly avec les langages de haut niveau puis en troisième partie, vous présenter mon simulateur de machine à état finis et vous expliquer comment il fonctionne et pour finir, une conclusion.
+Dans ce rapport, je vais vous présenter le WebAssembly. En première partie, je vais présenter les généralités, puis en seconde partie, la proximité du WebAssembly avec les langages de haut niveau puis en troisième partie, vous présenter mon simulateur de machine à état finis et vous expliquer comment il fonctionne et pour finir, une conclusion.
 
 ## Historique 
-En 1995, Javascript était créé en l’espace de 10 jours par Brendan Eich. Et à ce moment précis, Javascript c’était pas du tout désigné pour être rapide. Sortie de la validation de formulaires  c’est lent. Au fur et à mesure du temps ça s’arrangeait, mais à cette époque, Javascript jouait avec son caca côté performance.
+En 1995, Javascript était créé en l’espace de 10 jours par Brendan Eich. Et à ce moment précis, Javascript c’était pas du tout désigné pour être rapide. Sortie de la validation de formulaires  c’est lent. Au fur et à mesure du temps ça s’arrangeait, mais à cette époque, Javascript était mauvais côté performance.
 
 En 2008, Google est sorti de nulle part et a posé sur la table son nouveau navigateur : Google Chrome. À l’intérieur de Chrome se trouvait un moteur Javascript appelé V8. Et la révolution de V8 c’était la compilation Just in Time (JIT) du Javascript. Ce changement de code interprété à la compilation JIT accélérait monstrueusement les performances de Javascript, et donc des navigateurs de façon générale. Cette vitesse allait permettre la naissance de technologie comme NodeJS ou Électron et l’explosion de popularité de Javascript.
 
@@ -15,15 +15,15 @@ En 2015, WebAssembly est pour la première fois annoncé avec une petite démo d
 En 2019, la W3C faisait de WebAssembly une nouvelle norme du web. Comme l’a été le moteur V8 à son époque, WebAssembly s’annonce comme la nouvelle révolution coté performance. WebAssembly est donc déjà là, et son top départ a été fulgurant.
 
 ## Qu'est ce que le WebAssembly ?
-Le WebAssembly(abrégé WASM) est un nouveau type de code pouvant s'executer sur les navigateur web et peut donner des nouvelles fonctionnalités.
-Ce type est principalement développé par le [W3C Community Group](https://www.w3.org/community/webassembly/). Le WebAssembly est principalement intégré dans les navigateur connu d'aujourd'hui : Firefox, Chrome, Opera, Safari.
+Le WebAssembly(abrégé WASM) est un nouveau type de code pouvant s'executer sur les navigateurs web et peut donner des nouvelles fonctionnalités.
+Ce type est principalement développé par le [W3C Community Group](https://www.w3.org/community/webassembly/). Le WebAssembly est principalement intégré dans les navigateurs connu d'aujourd'hui : Firefox, Chrome, Opera, Safari.
 
 
 ## A quoi cela sert t-il ?
 
 Le WebAssembly n'est généralement pas utilisé comme langage. Il est principalement utilisé comme cible de compilation à partir des langages de haut niveau choisi par les développeurs. 
 
-Ainsi, les développeurs peuvent développer des programme dans ces langages, les compiler en wasm et les executer sur le navigateur Web.
+Ainsi, les développeurs peuvent développer des programmes dans ces langages, les compiler en wasm et les executer sur le navigateur Web.
 
 Cependant, il faut noter que le WebAssembly possède une representation textuelle. Sa représentation textuelle est le WAT(WebAssembly Text).
 
@@ -51,7 +51,7 @@ Ensuite, nous pouvons complexifier le module en ajoutant un noeud func :
 ```
 - La signature prend les paramètres de la fonction ainsi que ses types.
 
-- La partie locals prends les variables et ses types.
+- La partie locals prend les variables et ses types.
 
 - La partie body est une suite linéaire d'instruction de bas niveau.
 
@@ -105,11 +105,11 @@ Programme 1 : Addition
     (export "add" (func $add))
 )
 ``` 
-Dans ce programme, on récupère le premier paramètre i32 et le paramètre $p1 grâce à l'instruction local.get. Ensuite, on ajoute ces deux paramètre récupérer grâce à l'instruction de bas niveau : i32.add .
+Dans ce programme, on récupère le premier paramètre i32 et le paramètre $p1 grâce à l'instruction local.get. Ensuite, on ajoute ces deux paramètres grâce à l'instruction de bas niveau : i32.add .
 
 Enfin, pour pouvoir uiliser la fonction dans un autre programme, on exporte la fonction grâce à l'instruction export à la fin du programme. 
 
-Après avoir fait ce programme, il faut faire un programme en Javascript. Ce programme Javascript va indiquer au navigateur Web d'éxecuter le programme .WASM en instanciant un module WebAssembly.
+Après avoir fait ce programme, il faut faire un programme en Javascript. Ce programme Javascript va indiquer au navigateur Web d'exécuter le programme .WASM en instanciant un module WebAssembly.
 
 ```Javascript
 fetch("test.wasm")
@@ -121,11 +121,13 @@ fetch("test.wasm")
     });
 ``` 
 Dans ce programme Javascript, on utilise la fonction Fetch.
-On va récuperer le programme .wasm généré grâce à la fonction fetch et ainsi pouvoir l'executer grâce à l'instruction response(réponse de la requète HTTP).
+On va récuperer le programme .wasm généré grâce à la fonction fetch et ainsi pouvoir l'exécuter grâce à l'instruction response(réponse de la requète HTTP).
 
-On fait appel à la fonction codé en WAT avec la fonction exports qui permet d'appelé les fonction exporté. Ici, on veut addition 3+2. Dans la console du navigateur, nous devrons visualiser 5.
+On fait appel à la fonction codé en WAT avec la fonction exports qui permet d'appeler les fonction exporté. Ici, on veut addition 3+2. Dans la console du navigateur, nous devrons visualiser 5.
 
 <img src="images/add.png" >
+
+Nous visualisons bien 5 comme résultat dans la console.
 
 Exemple 2(plus complexe) : Programmation de factorielle en WebAssembly Text : 
 
@@ -172,7 +174,7 @@ Exemple 2(plus complexe) : Programmation de factorielle en WebAssembly Text :
 
 Dans ce programme, la fonction mathématique factorielle a été programmé.
 
-On compile le programme la commande wat2wasm et on effectue le même processus que pour l'addition.
+On compile le programme avec la commande wat2wasm et on effectue le même processus que pour l'exécution du programme addition.
 
 On fait un factorielle de 6  : 
 ```Javascript
