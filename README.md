@@ -12,7 +12,7 @@ Installer Go sur Linux (Ubuntu) :
 ```
 sudo apt-get install golang-go
 ```
-Entrez votre programme DSLAuto dans le fichier fsm.nz puis ensuite faite : 
+Entrez votre programme DSLAuto dans le fichier fsm.nz puis ensuite faire : 
 ```
 ./run.sh
 ```
@@ -28,7 +28,7 @@ Puis faire un make des Machine à Etats Finis que vous voulez simuler :
 make fsm
 ```
 
-ensuite aller dans le dossier cmd/server/ et lancer la commande : 
+Enfin,  aller dans le dossier cmd/server/ et lancer la commande : 
 
 ```
 go run main.go
