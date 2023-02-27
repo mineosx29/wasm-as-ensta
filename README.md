@@ -4,7 +4,7 @@ Dans le cadre du module Application Système, j'ai choisi le sujet : Découverte
 Cette application sert principalement à démontrer les possibilités de développement qu'on peut effectuer avec WASM.
 
 ## Pré-Requis
-Cloner le repositorie Github: 
+Cloner le dépot Github: 
 ```
 git clone https://github.com/mineosx29/wasm-as-ensta.git
 ```
