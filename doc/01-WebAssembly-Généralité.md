@@ -1,9 +1,9 @@
 # WebAssembly - Généralité
 
 ## Introduction
-Dans le cadre du module Application Système du semestre 5 à l'ENSTA Bretagne, plusieurs sujets ont été proposé. Un sujet m'a tout de suite intéressé : Le WebAssembly. J'ai pris ce sujet car c'était un sujet orienté recherche/découverte et la deuxième raison est que je ne connaissais pas du tout le WebAssembly et ma curiosité a pris le dessus. 
+Dans le cadre du module Application système du semestre 5 à l'ENSTA Bretagne, plusieurs sujets ont été proposé. Un sujet m'a tout de suite intéressé : Le Web Assembly. J'ai pris ce sujet car c'était un sujet orienté recherché/découvert et la deuxième raison est que je ne connaissais pas du tout le WebAssembly et ma curiosité a pris le dessus.
 
-Dans ce rapport, je vais vous présenter le WebAssembly. En première partie, je vais présenter les généralités, puis en seconde partie, la proximité du WebAssembly avec les langages de haut niveau puis en troisième partie, vous présenter mon simulateur de machine à état finis et vous expliquer comment il fonctionne et pour finir, une conclusion.
+Dans ce rapport, je vais vous présenter le WebAssembly. En première partie, je vais présenter les généralités, puis en seconde partie, la proximité du WebAssembly avec les langages de haut niveau puis en troisième partie, vous présenter mon simulateur de machine à état fini  et vous expliquer comment il fonctionne et pour finir, une conclusion.
 
 ## Historique 
 En 1995, Javascript était créé en l’espace de 10 jours par Brendan Eich. Et à ce moment précis, Javascript c’était pas du tout désigné pour être rapide. Sortie de la validation de formulaires  c’est lent. Au fur et à mesure du temps ça s’arrangeait, mais à cette époque, Javascript était mauvais côté performance.
@@ -15,32 +15,32 @@ En 2015, WebAssembly est pour la première fois annoncé avec une petite démo d
 En 2019, la W3C faisait de WebAssembly une nouvelle norme du web. Comme l’a été le moteur V8 à son époque, WebAssembly s’annonce comme la nouvelle révolution coté performance. WebAssembly est donc déjà là, et son top départ a été fulgurant.
 
 ## Qu'est ce que le WebAssembly ?
-Le WebAssembly(abrégé WASM) est un nouveau type de code pouvant s'executer sur les navigateurs web et peut donner des nouvelles fonctionnalités.
-Ce type est principalement développé par le [W3C Community Group](https://www.w3.org/community/webassembly/). Le WebAssembly est principalement intégré dans les navigateurs connu d'aujourd'hui : Firefox, Chrome, Opera, Safari.
+Le WebAssembly(abrégé WASM) est un nouveau type de code pouvant s'exécuter sur les navigateurs web et peut donner des nouvelles fonctionnalités.
+Ce type est principalement développé par le [W3C Community Group](https://www.w3.org/community/webassembly/). Le WebAssembly est principalement intégré dans dans les navigateurs connus d'aujourd'hui : Firefox, Chrome, Opera, Safari.
 
 
 ## A quoi cela sert t-il ?
 
 Le WebAssembly n'est généralement pas utilisé comme langage. Il est principalement utilisé comme cible de compilation à partir des langages de haut niveau choisi par les développeurs. 
 
-Ainsi, les développeurs peuvent développer des programmes dans ces langages, les compiler en wasm et les executer sur le navigateur Web.
+Ainsi, les développeurs peuvent développer des programmes dans ces langages, les compiler en wasm et les exécuter sur le navigateur Web.
 
-Cependant, il faut noter que le WebAssembly possède une representation textuelle. Sa représentation textuelle est le WAT(WebAssembly Text).
+Cependant, il faut noter que le WebAssembly possède une représentation textuelle. Sa représentation textuelle est le WAT(WebAssembly Text).
 
 ## Sa représentation Textuelle : le WAT
 
-Pour que le WebAssembly soit lu et edité par les hommes, le WAT, le format textuelle a été développé. 
+Pour que le WebAssembly soit lu et édité par les hommes, le WAT, le format textuel a été développé. 
 
 Nous allons voir sa s-expression et la syntaxe du langage: 
 
-La principale unité de code dans le WebAssembly est un module.
+la principale unité de code dans le WebAssembly est un module.
 
 ```
 (module (memory 1) (func))
 ```
-On peut illustrer cela comme un arbre avec des noeuds. Chaque expression entre parenthèse représente un noeud. Dans ce cas, le noeud est le module et les noeuds enfants sont memory avec 1 comme attribut et un autre noeud : func.
+On peut illustrer cela comme un arbre avec des noeuds. Chaque expression entre parenthèses représente un noeud. Dans ce cas, le noeud est le module et les noeuds enfants sont memory avec 1 comme attribut et un autre noeud : func.
 
-Nous pouvons commencer un programme WebAssembly dans le plus simple des cas : 
+Nous pouvons commencer un programme WebAssembly dans le plus simple des cas :
 ```
 (module)
 ```
@@ -53,7 +53,7 @@ Ensuite, nous pouvons complexifier le module en ajoutant un noeud func :
 
 - La partie locals prend les variables et ses types.
 
-- La partie body est une suite linéaire d'instruction de bas niveau.
+- La partie body est une suite linéaire d'instructions de bas niveau.
 
 Signature et paramètres : 
 
@@ -77,22 +77,21 @@ Le principe est simple : ici, on veut récupérer la valeur du paramètre i32, l
 
 ## Son format binaire
 
-A la compilation, nous pouvons lire le fichier wasm et on pourra distinguer des données binaire:
+A la compilation, nous pouvons lire le fichier wasm et on pourra distinguer des données binaires:
 
 <img src="images/dump.png"> 
 
-Les données sont pricipalement de l'héxadécimale. Cependant, il est impossible pour l'homme de debugguer ou modifier le programme à partir de ce binaire. Il faut aller dans le format textuelle pour pouvoir faire des modifications.
+Les données sont principalement de l'hexadécimale. Cependant, il est impossible pour l'homme de debugguer ou modifier le programme à partir de ce binaire. Il faut aller dans le format textuel pour pouvoir faire des modifications.
 ## Gestion de la mémoire   
 La pile d'exécution dans lequel WebAssembly s'exécute est séparé de la mémoire et donc la mémoire n'est pas accessible par le code.
 
 Le code WebAssembly ne peut pas accéder directement aux fonctions ou variables qui ne sont pas encore appelées, accéder à des adresses arbitraires ou exécuter des données en mémoire sous forme d’instructions de bytecode.
 
-Le module WASM possède que une mémoire "linéaire" dans lequel WebAssembly peut écrire ou lire dans cette mémoire ou demander l'augmentation de la taille de cette mémoire. De plus la mémoire linéaire est elle même isolé des zones où contiennent son code et sa pile d'éxecution.
-
+Le module WASM possède qu'une mémoire "linéaire" dans lequel WebAssembly peut écrire ou lire dans ce mémoire ou demander l'augmentation de la taille de cette mémoire. De plus la mémoire linéaire est elle-même isolé des zones où contiennent son code et sa pile d'exécution.
 ## Exemple de programmes WebAssembly text 
 
 Pour montrer comment le langage WebAssembly Text fonctionne, j'ai fait 2 programmes : un simple, et un complexe. 
-Le programme simple est une simple addition entre 2 entiers. Et le programme plus complexe est un programme qui fait un factorielle d'un nombre. Dans cette partie, nous allons également voir comment executer un programme WASM et le Compiler.
+Le programme simple est une simple addition entre 2 entiers. Et le programme plus complexe est un programme qui fait un factorielle d'un nombre. Dans cette partie, nous allons également voir comment exécuter un programme WASM et le Compiler.
 
 Programme 1 : Addition 
 ```
@@ -107,7 +106,8 @@ Programme 1 : Addition
 ``` 
 Dans ce programme, on récupère le premier paramètre i32 et le paramètre $p1 grâce à l'instruction local.get. Ensuite, on ajoute ces deux paramètres grâce à l'instruction de bas niveau : i32.add .
 
-Enfin, pour pouvoir uiliser la fonction dans un autre programme, on exporte la fonction grâce à l'instruction export à la fin du programme. 
+Enfin, pour pouvoir utiliser la fonction dans un autre programme, on exporte la fonction grâce à l'instruction export à la fin du programme.
+
 
 Après avoir fait ce programme, il faut faire un programme en Javascript. Ce programme Javascript va indiquer au navigateur Web d'exécuter le programme .WASM en instanciant un module WebAssembly.
 
@@ -121,10 +121,9 @@ fetch("test.wasm")
     });
 ``` 
 Dans ce programme Javascript, on utilise la fonction Fetch.
-On va récuperer le programme .wasm généré grâce à la fonction fetch et ainsi pouvoir l'exécuter grâce à l'instruction response(réponse de la requète HTTP).
+On va récupérer le programme .wasm généré grâce à la fonction fetch et ainsi pouvoir l'exécuter grâce à l'instruction response(réponse de la requête HTTP).
 
-On fait appel à la fonction codé en WAT avec la fonction exports qui permet d'appeler les fonction exporté. Ici, on veut addition 3+2. Dans la console du navigateur, nous devrons visualiser 5.
-
+On fait appel à la fonction codée en WAT avec la fonction exports qui permet d'appeler les fonctions exportées. Ici, on veut addition 3+2. Dans la console du navigateur, nous devrons visualiser 5.
 <img src="images/add.png" >
 
 Nous visualisons bien 5 comme résultat dans la console.

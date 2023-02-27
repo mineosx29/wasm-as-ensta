@@ -2,7 +2,7 @@
 
 
 ## Qu'est une FSM ?
-Une machine à état finis est une machine qui est susceptible d'être dans un nombre fini d'état mais étant un moment donné que dans un état à la fois. L'état dans lequel il se trouve se nomme l'état courant. Le passage d'un état à un autre est activé par un évenement ou une condition.
+Une machine à état fini est une machine qui est susceptible d'être dans un nombre fini d'état mais étant un moment donné que dans un état à la fois. L'état dans lequel il se trouve se nomme l'état courant. Le passage d'un état à un autre est activé par un événement ou une condition.
 
 On rencontre de nombreuses FSM dans la vie quotidienne : un distributeur automatique, un ascenseur, un digicode etc...
 
@@ -13,11 +13,11 @@ Voici un exemple de machine à état finis :
 
 # Application : Simulateur de FSM
 
-Dans le cadre du module Application Système, j'ai programmé un simulateur de machine à État Finis dans le but de montrer les possibilités du WebAssembly. En effet, avec l'accord de mon professeur Superviseur, j'ai décidé d'inventer un langage automate qui décrira une FSM. Ensuite, un compilateur que j'ai construit s'occupera de le compiler. Enfin à la sortie du compilateur, un diagramme automate sera crée ainsi qu'un programme en Go qui décrit la FSM. J'ai décidé de générer un langage de haut niveau et non le format textuelle du WebAssembly pour les mêmes raisons mentionnées dans la précedente partie.
+Dans le cadre du module Application Système, j'ai programmé un simulateur de machine à État Finis dans le but de montrer les possibilités du WebAssembly. En effet, avec l'accord de mon professeur superviseur, j'ai décidé d'inventer un langage automate qui décrira une FSM. Ensuite, un compilateur que j'ai construit s'occupera de le compiler. Enfin à la sortie du compilateur, un diagramme automate sera créé ainsi qu'un programme en Go qui décrit la FSM. J'ai décidé de générer un langage de haut niveau et non le format textuel du WebAssembly pour les mêmes raisons mentionnées dans la précédente partie.
 
 Voici la chaîne de fonctionnement : 
 
-<img src="images/compil.png">
+<img src="images/compil2.png">
 
 ## Le langage DSL_Auto : Syntaxe
 J'ai décidé de rapprocher la grammaire et la syntaxe du langage aux des langages de haut niveau pour faciliter l'apprentissage et la prise en main du langage.
@@ -53,9 +53,9 @@ conditions -> if "identifier" then next_state=identifier
 Nous avons vu la syntaxe et la grammaire du langage DSL_Auto. Le langage DSL_Auto va être compilé et à partir de ce langage va être généré le diagramme automate ainsi que le programme Go décrivant la FSM.
 
 ## Fonctionnement du compilateur
-Le compilateur DSL_Auto se décompose en trois partie : 
+Le compilateur DSL_Auto se décompose en trois parties : 
 - Un lexer : cette partie va s’occuper de découper le code source en lexèmes.  
-- Un parser : elle va vérifier que la suite de lexèmes obtenu grâce au lexer correspond à la grammaire de notre langage source. Cette partie va également concevoir l’arbre de syntaxe abstraite.
+- Un parser : elle va vérifier que la suite de lexèmes obtenus grâce au lexer correspond à la grammaire de notre langage source. Cette partie va également concevoir l’arbre de syntaxe abstraite.
 - Un visiteur : C’est notre design pattern. Il va principalement visiter l’arbre de syntaxe abstraite. Le visiteur est directement intégré dans le générateur de code.
 
 Ci-dessous, un diagramme décrivant l'architecture du compilateur : 
@@ -96,7 +96,7 @@ reg_expression = [
     
 ]
 ```
-Ci-dessus, nous définissons une expression régulière pour chaque mot clé du langage de programmation.
+Ci-dessus, nous définissons une expression régulière pour chaque mot-clé du langage de programmation.
 
 Ensuite le lexer va séparer le langage source en lexèmes et voir si chaque lexème correspond à une des expressions régulières définit ci-dessus. C’est qu’on appelle l’analyse lexicale.
 
@@ -117,13 +117,13 @@ L’analyseur syntaxique va viser deux objectifs dans notre compilateur :
 
 - Construire un arbre de syntaxe abstraite.   
   
-Ici, nous utilisons dans notre analyseur syntaxique une analyse récursive descendante et nous utilisons généralement trois méthodes dans notre analyseur syntaxique et ces méthodes sont implémenté dans les méthodes parse_X également :    
+Ici, nous utilisons dans notre analyseur syntaxique une analyse récursive descendante et nous utilisons généralement trois méthodes dans notre analyseur syntaxique et ces méthodes sont implémentées dans les méthodes parse_X également :    
 
 - La méthode expect() : elle va servir à consommer un lexème de type attendu.
 - La méthode acceptit() : elle va consommer le lexème courant.
 - La méthode showNext() : elle va retourner le lexème courant.   
 
-La méthode parse définit dans le diagramme de classe sont des méthodes où on définit la grammaire du langage soit ses règles.
+Les méthodes parse définies dans le diagramme de classes sont des méthodes où on définit la grammaire du langage soit ses règles.
 Ainsi pour chaque déclaration de variable, pour chaque boucle conditionnel et conditions, le parser va vérifier via les méthodes parse_X() que chaque enchaînements de lexèmes du code source respectent bien la grammaire du langage.
 
 Prenons un exemple sur le compilateur : 
@@ -154,20 +154,20 @@ def parse_declarations(self):
         return declara
 ```
 
-Ici la fonction va consommer un lexème courant : ce sera soit input soit state. Par la suite, la fonction s'attend à consommer un léxème de type ASSIGN soit un "=". Ensuite, la fonction s'attend à consommer un lexeme de type IDENTIFIER soit le nom de l'état ou de l'entrée. Si la fonction consomme un lexeme qui n'est pas ce qui est attendu, cela retournera une erreur avec la fonction expect(). Puis, deux choix de syntaxe s'offre à l'utilisateur, soit un ";" entre les identifiers, soit une ",". Et le même processus se repetera.
+Ici la fonction va consommer un lexème courant : ce sera soit input soit state. Par la suite, la fonction s'attend à consommer un léxème de type ASSIGN soit un "=". Ensuite, la fonction s'attend à consommer un lexème de type IDENTIFIER soit le nom de l'état ou de l'entrée. Si la fonction consomme un lexeme qui n'est pas ce qui est attendu, cela retournera une erreur avec la fonction expect(). Puis, deux choix de syntaxe s'offre à l'utilisateur, soit un ";" entre les identifiers, soit une ",". Et le même processus se répètera.
 
-Comme vous pouvez le voir dans la fonction, la fonction rempli l’arbre à chaque lexème consommé.
-Le principe s’applique aux autre fonctions parse_X().
+Comme vous pouvez le voir dans la fonction, la fonction remplit l’arbre à chaque lexème consommé.
+Le principe s’applique aux autres fonctions parse_X().
 
 Voici le diagramme UML de l'AST :    
 <img src="images/AST.png">
 
 ## Générateur de Code Dot et GO
 
-Dans les génerateurs de code, le principe de visite de l'AST est intégré. Donc un visiteur est implémenté.
+Dans les générateurs de code, le principe de visite de l'AST est intégré. Donc un visiteur est implémenté.
 
 La visite va fonctionner de la manière suivante :   
-- Une méthode accept() sera introduit dans chaque classe de notre AST.
+- Une méthode accept() sera introduite dans chaque classe de notre AST.
 -  Le visiteur possède autant de méthode visitK () que de classe K dans notre AST
 -  Chaque méthode visitK() se présente comme une succession d'appels xi.accept(self) dont xi attribut de chaque classe K.
 
@@ -179,7 +179,7 @@ Générateur GO :
 
 ## Démonstration de fonctionnement : 
 
-Soit une FSM qui décrit le fonctionnement d'une lampe. La lampe à deux états : eteint ou allumé. Le passage d'un état à l'autre se fera par la commande active(pour allumer la lampe) et désactive(pour éteindre la lampe). 
+Soit une FSM qui décrit le fonctionnement d'une lampe. La lampe à deux états : éteint ou allumé. Le passage d'un état à l'autre se fera par la commande active(pour allumer la lampe) et désactive(pour éteindre la lampe). 
 
 Voici le programme codé en DSLAuto : 
 ```
@@ -204,7 +204,7 @@ begin lampe :
 
 end
 ```
-Le Diagramme Dot est généré à partir de code DOT généré par le compilateur :
+Le diagramme Dot est généré à partir de code DOT généré par le compilateur :
 ```Graphviz
 digraph lampe{
 rankdir=LR;
@@ -218,7 +218,7 @@ eteint -> allume [ label = "active"];
 allume -> eteint [ label = "desactive"];
 }
 ```    
-Ensuite l'image dot est généré en faisant cette commande : 
+Ensuite l'image dot est générée en faisant cette commande dans le terminal : 
 ```bash
 dot -Tpng code.gv -o ../assets/code2.png
 ```
@@ -297,7 +297,7 @@ func main() {
 ```
 ATTENTION : il se peut que le générateur GO mette la ligne state := eteint dans la partie const. La solution est de modifier le code GO à la main et mettre la ligne correspondante après le bloc const.
 
-Ensuite, après avoir compléte cette étape, il faut aller dans le dossier assets. Dans ce dossier, il y a un makefile qui permettra de compiler le code GO généré et ainsi le tester :    
+Ensuite, après avoir complété cette étape, il faut aller dans le dossier assets. Dans ce dossier, il y a un makefile qui permettra de compiler le code GO généré et ainsi le tester :    
 Aller dans le dossier assets :     
 ```bash
 cd ../assets
@@ -323,7 +323,7 @@ Aller à l'adresse https://localhost:9090 puis testez !
 
 ## Piste pour générer l'animation
 
-Par manque de temps, je n'ai pas pu mettre en oeuvre la génération d'animation du diagramme automate. Cependant, j'ai des pistes pour mettre en oeuvre une animation qui indique l'état courant de l'automate.
+Par manque de temps, je n'ai pas pu mettre en oeuvre la génération d'animations du diagramme automate. Cependant, j'ai des pistes pour mettre en oeuvre une animation qui indique l'état courant de l'automate.
 
 On peut générer à partir du générateur une animation Canvas qui indique l'état courant de l'automate. 
 En effet, L'élément canvas est un composant du langage Web HTML qui permet d'effectuer des rendus dynamiques d'images bitmap en utilisant des scripts dans des langages tels que le javascript. 
