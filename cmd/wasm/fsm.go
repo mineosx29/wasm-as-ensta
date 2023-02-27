@@ -53,6 +53,13 @@ func main() {
 				state = allume
 				}
 		}
+		if state == eteint {
+
+			if commande == "active and eco" {
+				fmt.Println(" Passage à Etat : eco")
+				state = eco
+				}
+		}
 		if state == allume {
 
 			if commande == "desactive" {

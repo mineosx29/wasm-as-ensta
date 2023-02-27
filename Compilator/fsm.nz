@@ -7,6 +7,8 @@ begin lampe :
         begin:
             if (active) then
                      next_state=allume
+            if (active and eco) then
+                     next_state=eco
                                     
     end case
 
